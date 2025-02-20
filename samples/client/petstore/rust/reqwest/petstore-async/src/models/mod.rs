@@ -1,5 +1,7 @@
 pub mod action_container;
 pub use self::action_container::ActionContainer;
+pub mod any_type_test;
+pub use self::any_type_test::AnyTypeTest;
 pub mod api_response;
 pub use self::api_response::ApiResponse;
 pub mod array_item_ref_test;
@@ -12,6 +14,8 @@ pub mod enum_array_testing;
 pub use self::enum_array_testing::EnumArrayTesting;
 pub mod nullable_array;
 pub use self::nullable_array::NullableArray;
+pub mod numeric_enum_testing;
+pub use self::numeric_enum_testing::NumericEnumTesting;
 pub mod optional_testing;
 pub use self::optional_testing::OptionalTesting;
 pub mod order;

@@ -16,9 +16,9 @@
 
 package org.openapitools.codegen.languages;
 
-import io.swagger.v3.oas.models.media.ArraySchema;
 import io.swagger.v3.oas.models.media.Schema;
 
+import lombok.Setter;
 import org.openapitools.codegen.*;
 import org.openapitools.codegen.exceptions.ProtoBufIndexComputationException;
 import org.openapitools.codegen.meta.GeneratorMetadata;
@@ -52,25 +52,27 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
 
     public static final String NUMBERED_FIELD_NUMBER_LIST = "numberedFieldNumberList";
 
-    public static final String START_ENUMS_WITH_UNKNOWN = "startEnumsWithUnknown";
+    public static final String START_ENUMS_WITH_UNSPECIFIED = "startEnumsWithUnspecified";
 
     private final Logger LOGGER = LoggerFactory.getLogger(ProtobufSchemaCodegen.class);
 
-    protected String packageName = "openapitools";
+    @Setter protected String packageName = "openapitools";
 
     private boolean numberedFieldNumberList = false;
 
-    private boolean startEnumsWithUnknown = false;
+    private boolean startEnumsWithUnspecified = false;
 
     @Override
     public CodegenType getTag() {
         return CodegenType.SCHEMA;
     }
 
+    @Override
     public String getName() {
         return "protobuf-schema";
     }
 
+    @Override
     public String getHelp() {
         return "Generates gRPC and protocol buffer schema files (beta)";
     }
@@ -162,7 +164,7 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
         cliOptions.clear();
 
         addSwitch(NUMBERED_FIELD_NUMBER_LIST, "Field numbers in order.", numberedFieldNumberList);
-        addSwitch(START_ENUMS_WITH_UNKNOWN, "Introduces \"UNKNOWN\" as the first element of enumerations.", startEnumsWithUnknown);
+        addSwitch(START_ENUMS_WITH_UNSPECIFIED, "Introduces \"UNSPECIFIED\" as the first element of enumerations.", startEnumsWithUnspecified);
     }
 
     @Override
@@ -193,8 +195,8 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
             this.numberedFieldNumberList = convertPropertyToBooleanAndWriteBack(NUMBERED_FIELD_NUMBER_LIST);
         }
 
-        if (additionalProperties.containsKey(this.START_ENUMS_WITH_UNKNOWN)) {
-            this.startEnumsWithUnknown = convertPropertyToBooleanAndWriteBack(START_ENUMS_WITH_UNKNOWN);
+        if (additionalProperties.containsKey(this.START_ENUMS_WITH_UNSPECIFIED)) {
+            this.startEnumsWithUnspecified = convertPropertyToBooleanAndWriteBack(START_ENUMS_WITH_UNSPECIFIED);
         }
 
         supportingFiles.add(new SupportingFile("README.mustache", "", "README.md"));
@@ -231,6 +233,7 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
                 String name = (String) value.get("name");
                 value.put("name", prefix + "_" + name);
                 value.put("value", "\"" + prefix + "_" + name + "\"");
+
             }
         }
 
@@ -247,22 +250,21 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
      *
      * @param allowableValues allowable values
      */
-    public void addUnknownToAllowableValues(Map<String, Object> allowableValues) {
-        if (startEnumsWithUnknown) {
+    public void addUnspecifiedToAllowableValues(Map<String, Object> allowableValues) {
+        if (startEnumsWithUnspecified) {
             if (allowableValues.containsKey("enumVars")) {
                 List<Map<String, Object>> enumVars = (List<Map<String, Object>>) allowableValues.get("enumVars");
 
-                HashMap<String, Object> unknown = new HashMap<String, Object>();
-                unknown.put("name", "UNKNOWN");
-                unknown.put("isString", "false");
-                unknown.put("value", "\"UNKNOWN\"");
-
-                enumVars.add(0, unknown);
+                HashMap<String, Object> unspecified = new HashMap<String, Object>();
+                unspecified.put("name", "UNSPECIFIED");
+                unspecified.put("isString", "false");
+                unspecified.put("value", "\"UNSPECIFIED\"");
+                enumVars.add(0, unspecified);
             }
 
             if (allowableValues.containsKey("values")) {
                 List<String> values = (List<String>) allowableValues.get("values");
-                values.add(0, "UNKNOWN");
+                values.add(0, "UNSPECIFIED");
             }
         }
     }
@@ -289,7 +291,7 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
 
             if (cm.isEnum) {
                 Map<String, Object> allowableValues = cm.getAllowableValues();
-                addUnknownToAllowableValues(allowableValues);
+                addUnspecifiedToAllowableValues(allowableValues);
                 addEnumValuesPrefix(allowableValues, cm.getClassname());
                 if (allowableValues.containsKey("enumVars")) {
                     List<Map<String, Object>> enumVars = (List<Map<String, Object>>) allowableValues.get("enumVars");
@@ -317,7 +319,7 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
                 }
 
                 if (var.isEnum) {
-                    addUnknownToAllowableValues(var.allowableValues);
+                    addUnspecifiedToAllowableValues(var.allowableValues);
                     addEnumValuesPrefix(var.allowableValues, var.getEnumName());
 
                     if (var.allowableValues.containsKey("enumVars")) {
@@ -485,10 +487,6 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
         return underscore(name) + "_service";
     }
 
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
     @Override
     public String toModelFilename(String name) {
         // underscore the model file name
@@ -608,8 +606,7 @@ public class ProtobufSchemaCodegen extends DefaultCodegen implements CodegenConf
     @Override
     public String getTypeDeclaration(Schema p) {
         if (ModelUtils.isArraySchema(p)) {
-            ArraySchema ap = (ArraySchema) p;
-            Schema inner = ap.getItems();
+            Schema inner = ModelUtils.getSchemaItems(p);
             return getSchemaType(p) + "[" + getTypeDeclaration(inner) + "]";
         } else if (ModelUtils.isMapSchema(p)) {
             Schema inner = ModelUtils.getAdditionalProperties(p);

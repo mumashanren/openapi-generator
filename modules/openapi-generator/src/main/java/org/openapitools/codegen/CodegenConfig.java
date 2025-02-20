@@ -256,6 +256,10 @@ public interface CodegenConfig {
 
     void setSkipOperationExample(boolean skipOperationExample);
 
+    boolean isSkipSortingOperations();
+
+    void setSkipSortingOperations(boolean skipSortingOperations);
+
     public boolean isHideGenerationTimestamp();
 
     public void setHideGenerationTimestamp(boolean hideGenerationTimestamp);
@@ -358,8 +362,8 @@ public interface CodegenConfig {
 
     boolean getAddSuffixToDuplicateOperationNicknames();
 
-    boolean getUseOpenAPINormalizer();
+    boolean getUseOpenapiNormalizer();
 
-    Set<String> getOpenAPIGeneratorIgnoreList();
+    Set<String> getOpenapiGeneratorIgnoreList();
 
 }

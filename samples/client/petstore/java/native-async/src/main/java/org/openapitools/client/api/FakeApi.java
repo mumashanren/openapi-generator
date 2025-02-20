@@ -15,6 +15,7 @@ package org.openapitools.client.api;
 import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.ApiResponse;
+import org.openapitools.client.Configuration;
 import org.openapitools.client.Pair;
 
 import java.math.BigDecimal;
@@ -63,7 +64,7 @@ import java.util.function.Consumer;
 
 import java.util.concurrent.CompletableFuture;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.5.0-SNAPSHOT")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0-SNAPSHOT")
 public class FakeApi {
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
@@ -74,7 +75,7 @@ public class FakeApi {
   private final Consumer<HttpResponse<String>> memberVarAsyncResponseInterceptor;
 
   public FakeApi() {
-    this(new ApiClient());
+    this(Configuration.getDefaultApiClient());
   }
 
   public FakeApi(ApiClient apiClient) {
@@ -185,6 +186,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Health check endpoint
    * 
@@ -271,6 +273,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * 
    * Test serialization of outer boolean types
@@ -365,6 +368,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * 
    * Test serialization of object with outer number type
@@ -459,6 +463,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * 
    * Test serialization of outer number types
@@ -553,6 +558,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * 
    * Test serialization of outer string types
@@ -642,6 +648,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * application/json UTF8
    * 
@@ -728,6 +735,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Array of Enums
    * 
@@ -814,6 +822,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * test referenced additionalProperties
    * 
@@ -897,6 +906,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * 
    * For this test, the body for this request much reference a schema named &#x60;File&#x60;.
@@ -980,6 +990,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * 
    * 
@@ -1084,6 +1095,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * To test \&quot;client\&quot; model
    * To test \&quot;client\&quot; model
@@ -1182,6 +1194,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트 
    * Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트 
@@ -1350,6 +1363,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * To test enum parameters
    * To test enum parameters
@@ -1483,6 +1497,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Fake endpoint to test group parameters (optional)
    * Fake endpoint to test group parameters (optional)
@@ -1639,6 +1654,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
 
   public static final class APItestGroupParametersRequest {
     private Integer requiredStringGroup; // Required String in group parameters (required)
@@ -1799,6 +1815,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * test inline free-form additionalProperties
    * 
@@ -1882,6 +1899,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * test json serialization of form data
    * 
@@ -1982,6 +2000,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * 
    * To test the collection format in query parameters
@@ -2106,6 +2125,7 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * test referenced string map
    * 
@@ -2189,4 +2209,5 @@ public class FakeApi {
     }
     return localVarRequestBuilder;
   }
+
 }

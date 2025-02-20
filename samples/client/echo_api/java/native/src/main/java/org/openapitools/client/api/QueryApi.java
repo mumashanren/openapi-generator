@@ -15,6 +15,7 @@ package org.openapitools.client.api;
 import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.ApiResponse;
+import org.openapitools.client.Configuration;
 import org.openapitools.client.Pair;
 
 import org.openapitools.client.model.DataQuery;
@@ -56,7 +57,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.5.0-SNAPSHOT")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0-SNAPSHOT")
 public class QueryApi {
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
@@ -67,7 +68,7 @@ public class QueryApi {
   private final Consumer<HttpResponse<String>> memberVarAsyncResponseInterceptor;
 
   public QueryApi() {
-    this(new ApiClient());
+    this(Configuration.getDefaultApiClient());
   }
 
   public QueryApi(ApiClient apiClient) {
@@ -187,6 +188,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -285,6 +287,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -383,6 +386,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -450,7 +454,10 @@ public class QueryApi {
     String localVarQueryParameterBaseName;
     localVarQueryParameterBaseName = "query_object";
     if (queryObject != null) {
-      localVarQueryStringJoiner.add(queryObject.toUrlQueryString("query_object"));
+      String queryString = queryObject.toUrlQueryString("query_object");
+      if (!queryString.isBlank()) {
+        localVarQueryStringJoiner.add(queryString);
+      }
     }
 
     if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
@@ -475,6 +482,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -542,7 +550,10 @@ public class QueryApi {
     String localVarQueryParameterBaseName;
     localVarQueryParameterBaseName = "query_object";
     if (queryObject != null) {
-      localVarQueryStringJoiner.add(queryObject.toUrlQueryString("query_object"));
+      String queryString = queryObject.toUrlQueryString("query_object");
+      if (!queryString.isBlank()) {
+        localVarQueryStringJoiner.add(queryString);
+      }
     }
 
     if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
@@ -567,6 +578,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -657,6 +669,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -747,6 +760,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -837,6 +851,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -932,6 +947,7 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
   /**
    * Test query parameter(s)
    * Test query parameter(s)
@@ -1022,4 +1038,5 @@ public class QueryApi {
     }
     return localVarRequestBuilder;
   }
+
 }

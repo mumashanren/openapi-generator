@@ -3,6 +3,7 @@
 Cargo.toml
 README.md
 docs/ActionContainer.md
+docs/AnyTypeTest.md
 docs/ApiResponse.md
 docs/ArrayItemRefTest.md
 docs/Baz.md
@@ -10,6 +11,7 @@ docs/Category.md
 docs/EnumArrayTesting.md
 docs/FakeApi.md
 docs/NullableArray.md
+docs/NumericEnumTesting.md
 docs/OptionalTesting.md
 docs/Order.md
 docs/Pet.md
@@ -34,6 +36,7 @@ src/apis/testing_api.rs
 src/apis/user_api.rs
 src/lib.rs
 src/models/action_container.rs
+src/models/any_type_test.rs
 src/models/api_response.rs
 src/models/array_item_ref_test.rs
 src/models/baz.rs
@@ -43,6 +46,7 @@ src/models/mod.rs
 src/models/model_ref.rs
 src/models/model_return.rs
 src/models/nullable_array.rs
+src/models/numeric_enum_testing.rs
 src/models/optional_testing.rs
 src/models/order.rs
 src/models/pet.rs
